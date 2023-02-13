@@ -19,7 +19,7 @@ jupyter:
 ```
 
 ```python tags=[]
-from typing import Optional
+from typing import Optional, List
 ```
 
 # Leetcode-75
@@ -168,6 +168,100 @@ sol = Solution()
 
 result = sol.detectCycle(head)
 print(result)
+```
+
+# 121. [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/?envType=study-plan&id=level-1)
+
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+```python tags=[]
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+        
+        max_profit = 0
+        left_ix = 0
+        right_ix = 1
+        
+        while right_ix < len(prices):
+            profit = prices[right_ix] - prices[left_ix]
+            
+            if profit > max_profit:
+                max_profit = profit
+            
+            if prices[right_ix] < prices[left_ix]:
+                left_ix = right_ix
+            
+            right_ix +=1
+                
+        return max_profit
+```
+
+trick is of course to buy low and sell high. Which probably means we have to find a pair of numbers where b-a is biggest. So I could loop once over the list and grab the minimum and maximum. 
+
+We can loop over the array and keep track of the min and the max. 
+
+
+
+```python tags=[]
+prices = [7,1,5,3,6,4]
+```
+
+```python tags=[]
+sol = Solution()
+
+sol.maxProfit(prices)
+```
+
+# [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/)
+
+Given a string s which consists of lowercase or uppercase letters, return the length of the longest palindrome that can be built with those letters.
+
+Letters are case sensitive, for example, "Aa" is not considered a palindrome here.
+
+```python tags=[]
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        count_map = {}
+        
+        for char in s:
+            if char in count_map:
+                count_map[char] += 1
+            else:
+                count_map[char] = 1
+                
+        count = 0
+        used_uneven = False
+        
+        for k,v in count_map.items():
+            if v % 2 == 0:
+                count += v
+            else:
+                count += v - 1
+                
+                if not used_uneven:
+                    count += 1
+                    used_uneven = True
+        
+        return count
+```
+
+How do we build a longest palidrome? Basically for each different letter we have we can build it on both sides.
+If we have a single letter we can put it in the middle then all other single letters will fail. So from the set of all letters if even, we can use it for the palindrome, if uneven we cannot use it for the palindrome except for one (the one we put in the middle)
+
+```python tags=[]
+example = "abccccdd"
+```
+
+```python tags=[]
+sol = Solution()
+
+sol.longestPalindrome(example)
 ```
 
 ```python
