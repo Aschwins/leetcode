@@ -12,3 +12,5 @@ python setup.py develop
 # Start jupyter lab
 jupyter lab
 ```
+
+Have fun!
