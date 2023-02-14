@@ -27,7 +27,7 @@ from typing import Optional, List
 This notebook contains some solutions to problems in the [LeetCode 75 study plan](https://leetcode.com/study-plan/leetcode-75/).
 
 ```python tags=[]
-from lcp.core.node import ListNode, create_linked_list
+from lcp.core.node import ListNode, create_linked_list, Node, TreeNode
 ```
 
 ## 206. [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
@@ -262,6 +262,95 @@ example = "abccccdd"
 sol = Solution()
 
 sol.longestPalindrome(example)
+```
+
+# [589. N-ary Tree Preorder Traversal](https://leetcode.com/problems/n-ary-tree-preorder-traversal/)
+
+Given the root of an n-ary tree, return the preorder traversal of its nodes' values.
+
+Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)
+
+```python tags=[]
+class Solution:
+    def __init__(self):
+        self.result = []
+    
+    def preorder(self, root: Node) -> List[int]:
+        self.dfs(root)
+        return self.result
+        
+    def dfs(self, node):
+        if not node:
+            return
+        
+        self.result.append(node.val)
+
+        if node.children:
+            for child in node.children:
+                self.dfs(child)
+        return 
+    
+```
+
+```python tags=[]
+n5, n6 = Node(5), Node(6)
+n4 = Node(4)
+n3 = Node(3, [n5, n6])
+n2 = Node(2)
+n1 = Node(1, [n3, n2, n4])
+```
+
+```python tags=[]
+sol = Solution()
+
+sol.preorder(n1)
+```
+
+# [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+
+Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+```
+Input: root = [3,9,20,null,null,15,7]
+Output: [[3],[9,20],[15,7]]
+```
+
+```python tags=[]
+t15 = TreeNode(15)
+t7 = TreeNode(7)
+t20 = TreeNode(20, t15, t7)
+t9 = TreeNode(9)
+t3 = TreeNode(3, t9, t20)
+```
+
+```python tags=[]
+class Solution:
+    def __init__(self):
+        self.result = []
+        
+    def levelOrder(self, root):
+        level = [root]
+
+        while root and level:
+            current_nodes = []
+            next_level = []
+            for node in level:
+                current_nodes.append(node.val)
+                if node.left:
+                    next_level.append(node.left)
+                if node.right:
+                    next_level.append(node.right)
+            self.result.append(current_nodes)
+            level = next_level
+
+
+        return self.result
+```
+
+```python tags=[]
+sol = Solution()
+
+sol.levelOrder(t3)
 ```
 
 ```python
