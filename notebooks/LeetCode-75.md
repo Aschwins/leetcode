@@ -6,19 +6,19 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.4
+      jupytext_version: 1.15.0
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
 
-```python tags=[]
+```python
 %load_ext autoreload
 %autoreload 2
 ```
 
-```python tags=[]
+```python
 from typing import Optional, List
 ```
 
@@ -26,7 +26,8 @@ from typing import Optional, List
 
 This notebook contains some solutions to problems in the [LeetCode 75 study plan](https://leetcode.com/study-plan/leetcode-75/).
 
-```python tags=[]
+
+```python
 from lcp.core.node import ListNode, create_linked_list, Node, TreeNode
 ```
 
@@ -34,7 +35,7 @@ from lcp.core.node import ListNode, create_linked_list, Node, TreeNode
 
 Given the head of a singly linked list, reverse the list, and return the reversed list.
 
-<!-- #region tags=[] -->
+<!-- #region -->
 [1, 2] -> [2, 1]
 
 [1] -> [1]
@@ -47,7 +48,7 @@ brute force:
 go to the end of the list and for each index create a hashmap of each node. Then afterwards go back through the hashmap and create the new linked list
 <!-- #endregion -->
 
-```python tags=[]
+```python
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         index_map = {}
@@ -77,11 +78,11 @@ class Solution:
         return reversed_head
 ```
 
-```python tags=[]
-head = create_linked_list([])
+```python
+head = create_linked_list([4, 7, 1, 4])
 ```
 
-```python tags=[]
+```python
 sol = Solution()
 
 result = sol.reverseList(head)
@@ -94,7 +95,7 @@ Given the head of a singly linked list, return the middle node of the linked lis
 
 If there are two middle nodes, return the second middle node.
 
-```python tags=[]
+```python
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         index_map = {}
@@ -120,11 +121,11 @@ class Solution:
             return index_map.get(int(ix/2)+1)
 ```
 
-```python tags=[]
+```python
 head = create_linked_list([])
 ```
 
-```python tags=[]
+```python
 sol = Solution()
 
 result = sol.middleNode(head)
@@ -139,7 +140,7 @@ There is a cycle in a linked list if there is some node in the list that can be 
 
 Do not modify the linked list.
 
-```python tags=[]
+```python
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head:
@@ -159,11 +160,11 @@ class Solution:
         return None
 ```
 
-```python tags=[]
+```python
 head = create_linked_list([1])
 ```
 
-```python tags=[]
+```python
 sol = Solution()
 
 result = sol.detectCycle(head)
@@ -178,7 +179,7 @@ You want to maximize your profit by choosing a single day to buy one stock and c
 
 Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 
-```python tags=[]
+```python
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:
@@ -208,11 +209,11 @@ We can loop over the array and keep track of the min and the max.
 
 
 
-```python tags=[]
+```python
 prices = [7,1,5,3,6,4]
 ```
 
-```python tags=[]
+```python
 sol = Solution()
 
 sol.maxProfit(prices)
@@ -224,7 +225,7 @@ Given a string s which consists of lowercase or uppercase letters, return the le
 
 Letters are case sensitive, for example, "Aa" is not considered a palindrome here.
 
-```python tags=[]
+```python
 class Solution:
     def longestPalindrome(self, s: str) -> int:
         count_map = {}
@@ -254,11 +255,11 @@ class Solution:
 How do we build a longest palidrome? Basically for each different letter we have we can build it on both sides.
 If we have a single letter we can put it in the middle then all other single letters will fail. So from the set of all letters if even, we can use it for the palindrome, if uneven we cannot use it for the palindrome except for one (the one we put in the middle)
 
-```python tags=[]
+```python
 example = "abccccdd"
 ```
 
-```python tags=[]
+```python
 sol = Solution()
 
 sol.longestPalindrome(example)
@@ -270,7 +271,7 @@ Given the root of an n-ary tree, return the preorder traversal of its nodes' val
 
 Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)
 
-```python tags=[]
+```python
 class Solution:
     def __init__(self):
         self.result = []
@@ -292,7 +293,7 @@ class Solution:
     
 ```
 
-```python tags=[]
+```python
 n5, n6 = Node(5), Node(6)
 n4 = Node(4)
 n3 = Node(3, [n5, n6])
@@ -300,7 +301,7 @@ n2 = Node(2)
 n1 = Node(1, [n3, n2, n4])
 ```
 
-```python tags=[]
+```python
 sol = Solution()
 
 sol.preorder(n1)
@@ -315,7 +316,7 @@ Input: root = [3,9,20,null,null,15,7]
 Output: [[3],[9,20],[15,7]]
 ```
 
-```python tags=[]
+```python
 t15 = TreeNode(15)
 t7 = TreeNode(7)
 t20 = TreeNode(20, t15, t7)
@@ -323,7 +324,7 @@ t9 = TreeNode(9)
 t3 = TreeNode(3, t9, t20)
 ```
 
-```python tags=[]
+```python
 class Solution:
     def __init__(self):
         self.result = []
@@ -347,7 +348,7 @@ class Solution:
         return self.result
 ```
 
-```python tags=[]
+```python
 sol = Solution()
 
 sol.levelOrder(t3)
@@ -359,7 +360,7 @@ Given an array of integers nums which is sorted in ascending order, and an integ
 
 You must write an algorithm with O(log n) runtime complexity.
 
-```python tags=[]
+```python
 class Solution:
     def __init__(self):
         self.ix = 0
@@ -398,7 +399,7 @@ class Solution:
             self.remove(nums[:mid_ix], target)
 ```
 
-```python tags=[]
+```python
 example = [-1,0,3,5,9,12]
 
 sol = Solution()
@@ -415,23 +416,20 @@ Suppose you have n versions [1, 2, ..., n] and you want to find out the first ba
 
 You are given an API bool isBadVersion(version) which returns whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.
 
-<!-- #region -->
+```python
 import random
 from functools import partial
 
-
-python tags=[]
 def foo(version: int, bad_n: int):
     return version >= bad_n
 
 isBadVersion = partial(foo, bad_n=random.randint(1, 500))
 
 
-python tags=[]
 isBadVersion
+```
 
-
-python tags=[]
+```python
 # The isBadVersion API is already defined for you.
 # def isBadVersion(version: int) -> bool:
 
@@ -448,14 +446,92 @@ class Solution:
         return left
 
 
-python tags=[]
 sol = Solution()
 
 sol.firstBadVersion(500)
+```
 
+# [1768. Merge Strings Alternately](https://leetcode.com/problems/merge-strings-alternately/description/)
 
-python tags=[]
-isBadVersion(35)
+You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.
 
-python
-<!-- #endregion -->
+Return the merged string.
+
+```python
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        word1_is_shortest = len(word1) < len(word2)
+        min_len = len(word1) if word1_is_shortest else len(word2)
+
+        result = ""
+        for i in range(min_len):
+            result = result + word1[i] + word2[i]
+
+        if word1_is_shortest:
+            result = result + word2[i+1:]
+
+        else:
+            result = result + word1[i+1:]
+        
+        return result
+```
+
+```python
+sol = Solution()
+
+sol.mergeAlternately("foo", "barrr")
+```
+
+# [1071. Greatest Common Divisor of Strings](https://leetcode.com/problems/greatest-common-divisor-of-strings/description/)
+
+For two strings `s` and `t`, we say "`t` divides `s`" if and only if `s = t + ... + t` (i.e., `t` is concatenated with itself one or more times).
+
+Given two strings `str1` and `str2`, return the largest string `x` such that `x` divides both `str1` and `str2`.
+
+```python
+"ab" * 2
+```
+
+```python
+class Solution:
+
+    def is_divisor(self, str1: str, sub_str1: str):
+        res = len(str1) % len(sub_str1)
+        if res != 0:
+            return False
+        div = int(len(str1) / len(sub_str1))
+
+        return sub_str1 * div == str1
+        
+    
+    
+    def get_divisors(self, str1: str):
+        divisors = []
+        substr = ""
+        for i in range(1, len(str1)+1):
+            if self.is_divisor(str1, str1[:i]):
+                divisors.append(str1[:i])
+        return divisors
+
+    
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        
+        divs1 = self.get_divisors(str1)
+        divs2 = self.get_divisors(str2)
+
+        intersection = list(set(divs1).intersection(set(divs2)))
+
+        gcd = max(intersection, key=len)
+
+        return gcd
+```
+
+```python
+sol = Solution()
+
+sol.gcdOfStrings("ABAABAABA", "ABA")
+```
+
+```python
+
+```
