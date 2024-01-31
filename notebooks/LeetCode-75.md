@@ -532,6 +532,69 @@ sol = Solution()
 sol.gcdOfStrings("ABAABAABA", "ABA")
 ```
 
+## [1431. Kids With the Greatest Number of Candies](https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/?envType=study-plan-v2&envId=leetcode-75)
+
+There are n kids with candies. You are given an integer array candies, where each candies[i] represents the number of candies the ith kid has, and an integer extraCandies, denoting the number of extra candies that you have.
+
+Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies, they will have the greatest number of candies among all the kids, or false otherwise.
+
+Note that multiple kids can have the greatest number of candies.
+
+
+
+```python
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        maxC = max(candies)
+
+        return [(candy + extraCandies) >= maxC for candy in candies]
+```
+
+```python
+sol = Solution()
+
+candies = [2,3,5,1,3]; extraCandies = 3
+
+sol.kidsWithCandies(candies, extraCandies)
+```
+
+## [605. Can Place Flowers](https://leetcode.com/problems/can-place-flowers/description/?envType=study-plan-v2&envId=leetcode-75)
+
+You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.
+
+Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return true if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule and false otherwise.
+
+```python
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        # a spot is surrounded by zeros.
+        flowerbed = [0] + flowerbed + [0]
+        current_ix = 1
+        spot_count = 0
+
+        while current_ix < len(flowerbed)-1:
+            current = flowerbed[current_ix]
+            next = flowerbed[current_ix + 1]
+            previous = flowerbed[current_ix -1]
+
+            if current == 0 and next == 0 and previous == 0:
+                spot_count += 1
+                flowerbed[current_ix] = 1
+
+            current_ix += 1
+
+        return n <= spot_count
+```
+
+```python
+sol = Solution()
+
+flowerbed = [0,0,0]
+n = 2
+
+sol.canPlaceFlowers(flowerbed, n)
+```
+
 ```python
 
 ```
