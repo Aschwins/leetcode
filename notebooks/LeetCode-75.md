@@ -595,6 +595,71 @@ n = 2
 sol.canPlaceFlowers(flowerbed, n)
 ```
 
+## [345. Reverse Vowels of a String](https://leetcode.com/problems/reverse-vowels-of-a-string/description/)
+
+Given a string s, reverse only all the vowels in the string and return it.
+
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+
+```python
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        vowelSet = {"a", "e", "i", "o", "u"}
+
+        letters = []
+        vowels = []
+
+        for l in s:
+            if l.lower() in vowelSet:
+                vowels.append(l)
+
+        print(vowels)
+        
+        for l in s:
+            if l.lower() in vowelSet:
+                reversed_vowel = vowels.pop(-1)
+                letters.append(reversed_vowel)
+            else:
+                letters.append(l)
+        
+        return "".join(letters)
+```
+
+```python
+sol = Solution()
+
+string1 = "aA"
+
+sol.reverseVowels(string1)
+```
+
+## [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/description/)
+
+Given an input string s, reverse the order of the words.
+
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+
+Return a string of the words in reverse order concatenated by a single space.
+
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+
+```python
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        sentence_list = s.split(" ")
+        stripped_sentence_list = [w for w in sentence_list if w != ""]
+
+        return " ".join(stripped_sentence_list[-1::-1])
+```
+
+```python
+sentence = "   this     is a nice sentence   "
+
+sol = Solution()
+
+sol.reverseWords(sentence)
+```
+
 ```python
 
 ```
